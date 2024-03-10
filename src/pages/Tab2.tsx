@@ -1,22 +1,62 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-
-import './Tab2.css';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonItem,
+  IonInput,
+  IonButton,
+} from "@ionic/react";
+import { useState } from "react";
+import axios from "axios";
+import "./Tab2.css";
 
 const Tab2: React.FC = () => {
+  const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
+
+  function getGender(name: string) {
+    axios
+      .get(`https://api.genderize.io?name=${name}`)
+
+      .then((res) => {
+        if (res.data.error) {
+          setGender("Request limit reached");
+       
+          
+          
+        } else {
+          setGender(res.data.gender);
+         
+        }
+      });
+  }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+          <IonTitle>Gender</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <h1>Hello World</h1>
+        <div className="container">
+          <IonItem>
+            <IonInput
+              label="Name"
+              placeholder="Enter the name"
+              value={name}
+            ></IonInput>
+          </IonItem>
+          <h1>{name}</h1>
+          <IonButton
+            onClick={() => {
+              getGender(name);
+            }}
+          >
+            Get
+          </IonButton>
+        </div>
       </IonContent>
     </IonPage>
   );
