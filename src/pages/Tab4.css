@@ -1,0 +1,21 @@
+.container-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.table-container {
+    max-height: 70%; 
+    overflow-y: auto;
+}
+  
