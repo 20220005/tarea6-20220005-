@@ -21,7 +21,7 @@ const Tab1: React.FC = () => {
       <IonContent fullscreen>
        
 
-        <div className="container">
+        <div className="container-toolbox">
           <IonImg
           className="toolbox"
             src={toolbox}
