@@ -44,7 +44,7 @@ const Tab3: React.FC = () => {
             ></IonInput>
           </IonItem>
           <h1>Your Age is: {Age}</h1>
-          <IonButton onClick={() => {}}>Get Age</IonButton>
+          <IonButton onClick={() => {getAge(name)}}>Get Age</IonButton>
         </div>
       </IonContent>
     </IonPage>
