@@ -10,7 +10,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { accessibility, ellipse, globe, hammer, happy, information, logoWordpress, man, rainy, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -33,6 +33,10 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Tab4 from './pages/Tab4';
+import Tab6 from './pages/Tab6';
+import Tab5 from './pages/Tab5';
+import Tab7 from './pages/Tab7';
 
 setupIonicReact();
 
@@ -41,32 +45,56 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
+          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route path="/tab1" component={Tab1} exact={true} />
+          <Route path="/tab2" component={Tab2} />
+          <Route path="/tab3" component={Tab3} />
+          <Route path="/tab4" component={Tab4} />
+          <Route path="/tab5" component={Tab5} />
+          <Route path="/tab6" component={Tab6} />
+          <Route path="/tab7" component={Tab7} />
+
+          
+      </IonRouterOutlet>
+
+        
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+            <IonIcon aria-hidden="true" icon={hammer} />
+            <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon aria-hidden="true" icon={man} />
+            <IonLabel>Gender</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonIcon aria-hidden="true" icon={happy} />
+            <IonLabel>Age</IonLabel>
           </IonTabButton>
+
+          <IonTabButton tab="tab4" href="/tab4">
+            <IonIcon aria-hidden="true" icon={globe} />
+            <IonLabel>Country</IonLabel>
+          </IonTabButton>
+
+          <IonTabButton tab="tab5" href="/tab5">
+            <IonIcon aria-hidden="true" icon={rainy} />
+            <IonLabel>Weather</IonLabel>
+          </IonTabButton>
+
+          <IonTabButton tab="tab6" href="/tab6">
+            <IonIcon aria-hidden="true" icon={logoWordpress} />
+            <IonLabel>Page</IonLabel>
+          </IonTabButton>
+
+          <IonTabButton tab="tab7" href="/tab7">
+            <IonIcon aria-hidden="true" icon={information} />
+            <IonLabel>Info</IonLabel>
+          </IonTabButton>
+
+
+
+
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
