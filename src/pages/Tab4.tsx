@@ -10,7 +10,7 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
-  IonSpinner // Importamos IonSpinner para mostrar el indicador de carga
+  IonSpinner 
 } from "@ionic/react";
 import { useState } from "react";
 import "./Tab4.css";
