@@ -19,17 +19,15 @@ const Tab2: React.FC = () => {
   function getGender(name: string) {
     axios
       .get(`https://api.genderize.io?name=${name}`)
-
+ 
       .then((res) => {
-        if (res.data.error) {
-          setGender("Request limit reached");
-       
-          
-          
-        } else {
+   
           setGender(res.data.gender);
-         
-        }
+          console.log(name);
+        
+   
+       
+      
       });
   }
   return (
