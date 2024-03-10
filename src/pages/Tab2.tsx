@@ -45,10 +45,10 @@ const Tab2: React.FC = () => {
             <IonInput
               label="Name"
               placeholder="Enter the name"
-              value={name}
+              onIonChange={(e) => setName(e.detail.value!)}
             ></IonInput>
           </IonItem>
-          <h1>{name}</h1>
+          <h1>Your Gender is: {gender}</h1>
           <IonButton
             onClick={() => {
               getGender(name);
