@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import axios from 'axios';
 import './Tab6.css';
 
 const Tab6: React.FC = () => {
@@ -8,9 +9,8 @@ const Tab6: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch('https://time.com/wp-json/wp/v2/posts');
-        const data = await response.json();
-        setNews(data); 
+        const response = await axios.get('https://time.com/wp-json/wp/v2/posts');
+        setNews(response.data); 
       } catch (error) {
         console.error('Error fetching news:', error);
       }
