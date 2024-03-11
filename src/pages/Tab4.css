@@ -1,21 +1,18 @@
-.container-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 30%;
-
-}
-.table{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-}
-
-.table-container {
-    max-height: 70%; 
+.card-container{
     overflow-y: auto;
+    max-height: 600px;
+    padding: 20px;
+   
 }
+
+.card-container .card{
+    background-color: black;
+    box-shadow: 0 4px 8px 0 rgba(212, 205, 205, 0.103);
+
+}
+.card-container .card p{
+    color: white;
+}
+
+
   
