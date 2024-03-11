@@ -10,6 +10,7 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/react";
+import axios from "axios";
 import "./Tab4.css";
 
 const Tab4: React.FC = () => {
@@ -23,14 +24,14 @@ const Tab4: React.FC = () => {
     }
 
     setLoading(true);
-    fetch(`http://universities.hipolabs.com/search?country=${country}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUniversity(data);
-        setLoading(false);
+    axios.get(`http://universities.hipolabs.com/search?country=${country}`)
+      .then((response) => {
+        setUniversity(response.data);
       })
       .catch((error) => {
         console.error("Error fetching universities:", error);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, [country]);
@@ -54,7 +55,7 @@ const Tab4: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-     
+         
         </div>
 
         <div className="table-container">
