@@ -6,7 +6,6 @@ const Tab6: React.FC = () => {
   const [news, setNews] = useState<any[]>([]);
 
   useEffect(() => {
-    
     const fetchNews = async () => {
       try {
         const response = await fetch('https://time.com/wp-json/wp/v2/posts');
@@ -29,13 +28,16 @@ const Tab6: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className="container-scroll">
-          {/* Mostrar las últimas 3 noticias */}
           {news.slice(0, 3).map((item, index) => (
             <div className="card" key={index}>
-              <a href={item.link} target="_blank" rel="noopener noreferrer"> <img src={item.jetpack_featured_media_url} alt={item.title.rendered} ></img></a>
-              <a href={item.link} target="_blank" rel="noopener noreferrer"> <h2>{item.title.rendered}</h2></a>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                <img src={item.jetpack_featured_media_url} alt={item.title.rendered} />
+              </a>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                <h2>{item.title.rendered}</h2>
+              </a>
               <p className='date'>{item.date}</p> 
-              <p>{item.content.rendered}</p>
+              <p>{item.content.plain.substring(0, 1000)}...</p>
               <a href={item.link} target="_blank" rel="noopener noreferrer">Leer más</a>
             </div>
           ))}
