@@ -1,35 +1,30 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonItem,
-  IonInput,
-  IonButton,
-} from "@ionic/react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonInput, IonButton, IonSpinner } from "@ionic/react";
 import "./Tab2.css";
 
 const Tab2: React.FC = () => {
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState<string | null>(null);
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function getGender(name: string) {
-    axios
-      .get(`https://api.genderize.io?name=${name}`)
- 
-      .then((res) => {
-   
+  useEffect(() => {
+    if (name.trim() !== "") { 
+      setLoading(true);
+      axios
+        .get(`https://api.genderize.io?name=${name}`)
+        .then((res) => {
           setGender(res.data.gender);
-          console.log(name);
-        
-   
-       
-      
-      });
-  }
+        })
+        .catch((error) => {
+          console.error("Error fetching gender:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [name]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -43,17 +38,15 @@ const Tab2: React.FC = () => {
             <IonInput
               label="Name"
               placeholder="Enter the name"
+              value={name}
               onIonChange={(e) => setName(e.detail.value!)}
             ></IonInput>
           </IonItem>
-          <h1>Your Gender is: {gender}</h1>
-          <IonButton
-            onClick={() => {
-              getGender(name);
-            }}
-          >
-            Get
-          </IonButton>
+          {gender !== null && (
+            <h1>Your Gender is: {gender}</h1>
+          )}
+         
+          {loading && <IonSpinner name="crescent" />}
         </div>
       </IonContent>
     </IonPage>
