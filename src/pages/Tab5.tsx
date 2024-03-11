@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonButton, IonContent, IonHeader, IonItem, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import axios from 'axios';
 
-import './Tab5.css'; // Importar archivo de estilos CSS
+import './Tab5.css'; 
 
 const Tab5: React.FC = () => {
   const apiKey = "4c6322333ead1e37846fd60bc88ac3ed";
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=Santo%20Domingo,do&appid=${apiKey}&units=metric`;
-  const [weather, setWeather] = useState([]);
+  const [weather, setWeather] = useState<any[]>([]);
   const [country, setCountry] = useState("");
 
+  useEffect(() => {
+    getWeather(); 
+  }, []); 
+
   function getWeather() {
-    fetch(apiUrl)
-      .then((res) => res.json())
-      .then((data) => {
+    axios.get(apiUrl) 
+      .then((response) => {
+        const data = response.data;
         console.log(data);
         setCountry("" + data.city.name + ", " + data.city.country);
         setWeather(data.list);
