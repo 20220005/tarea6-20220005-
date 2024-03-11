@@ -1,26 +1,23 @@
+import React, { useState, useEffect } from "react";
 import {
   IonButton,
-  IonCol,
   IonContent,
-  IonGrid,
   IonHeader,
   IonInput,
   IonItem,
   IonPage,
-  IonRow,
   IonSpinner,
   IonTitle,
   IonToolbar
 } from "@ionic/react";
-import { useState } from "react";
 import "./Tab4.css";
 
 const Tab4: React.FC = () => {
   const [country, setCountry] = useState("");
-  const [university, setUniversity] = useState([]);
+  const [university, setUniversity] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
-  function getCountry() {
+  useEffect(() => {
     if (!country.trim()) {
       return;
     }
@@ -31,8 +28,12 @@ const Tab4: React.FC = () => {
       .then((data) => {
         setUniversity(data);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching universities:", error);
+        setLoading(false);
       });
-  }
+  }, [country]);
 
   return (
     <IonPage>
@@ -53,15 +54,7 @@ const Tab4: React.FC = () => {
               }}
             ></IonInput>
           </IonItem>
-<div className="button-container">
-          <IonButton
-            onClick={() => {
-              getCountry();
-            }}
-          >
-            Get
-          </IonButton>
-          </div>
+     
         </div>
 
         <div className="table-container">
@@ -69,22 +62,17 @@ const Tab4: React.FC = () => {
             <IonSpinner />
           ) : (
             <div className="card-container">
-          
-                  {university.map((uni: any, index) => (
-
-                    <div className="card" key={index}>
-                    <div className="uni-name">
-                        <p>{uni.name}</p>
-                    </div>
-                    <div className="uni-data">
+              {university.map((uni: any, index) => (
+                <div className="card" key={index}>
+                  <div className="uni-name">
+                    <p>{uni.name}</p>
+                  </div>
+                  <div className="uni-data">
                     <p>{uni.domains}</p>
-                    <a href={uni.web_pages[0]} target="_blank">{uni.web_pages[0]}</a>
-                    </div>
-                    </div>
-
-                 
-                  ))}
-                
+                    <a href={uni.web_pages[0]} target="_blank" rel="noopener noreferrer">{uni.web_pages[0]}</a>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
