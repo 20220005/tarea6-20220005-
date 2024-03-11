@@ -61,35 +61,35 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon aria-hidden="true" icon={hammer} />
-            <IonLabel>Home</IonLabel>
+         
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon aria-hidden="true" icon={man} />
-            <IonLabel>Gender</IonLabel>
+         
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
             <IonIcon aria-hidden="true" icon={happy} />
-            <IonLabel>Age</IonLabel>
+           
           </IonTabButton>
 
           <IonTabButton tab="tab4" href="/tab4">
             <IonIcon aria-hidden="true" icon={globe} />
-            <IonLabel>Country</IonLabel>
+         
           </IonTabButton>
 
           <IonTabButton tab="tab5" href="/tab5">
             <IonIcon aria-hidden="true" icon={rainy} />
-            <IonLabel>Weather</IonLabel>
+           
           </IonTabButton>
 
           <IonTabButton tab="tab6" href="/tab6">
             <IonIcon aria-hidden="true" icon={logoWordpress} />
-            <IonLabel>Page</IonLabel>
+    
           </IonTabButton>
 
           <IonTabButton tab="tab7" href="/tab7">
             <IonIcon aria-hidden="true" icon={information} />
-            <IonLabel>Info</IonLabel>
+           
           </IonTabButton>
 
 
