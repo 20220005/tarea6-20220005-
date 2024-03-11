@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   IonContent,
   IonHeader,
@@ -7,26 +9,36 @@ import {
   IonItem,
   IonInput,
   IonButton,
-
+  IonSpinner,
 } from "@ionic/react";
-import { useState } from "react";
 import "./Tab3.css";
-import axios from "axios";
+
 const Tab3: React.FC = () => {
   const [name, setName] = useState("");
-  const [Age, setAge] = useState("");
+  const [age, setAge] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-
-  function getAge(name: string) {
-    axios.get(`https://api.agify.io?name=${name}`).then((res) => {
-      if (res.data.error) {
-        setAge("Request limit reached");
-      } else {
-        setAge(res.data.age);
-      }
+  useEffect(() => {
+    if (name.trim() !== "") {
+      setLoading(true);
+      axios
+        .get(`https://api.agify.io?name=${name}`)
+        .then((res) => {
+          if (res.data.error) {
+            setAge("Request limit reached");
+          } else {
+            setAge(res.data.age);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching age:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-    );
-  }
+  }, [name]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -40,11 +52,13 @@ const Tab3: React.FC = () => {
             <IonInput
               label="Name"
               placeholder="Enter the name"
+              value={name}
               onIonChange={(e) => setName(e.detail.value!)}
             ></IonInput>
           </IonItem>
-          <h1>Your Age is: {Age}</h1>
-          <IonButton onClick={() => {getAge(name)}}>Get Age</IonButton>
+          {age !== null && <h1>Your Age is: {age}</h1>}
+        
+          {loading && <IonSpinner name="crescent" />}
         </div>
       </IonContent>
     </IonPage>
