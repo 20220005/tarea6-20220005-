@@ -1,22 +1,45 @@
+import React, { useState, useEffect } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-
 import './Tab6.css';
 
 const Tab6: React.FC = () => {
+  const [news, setNews] = useState<any[]>([]);
+
+  useEffect(() => {
+    
+    const fetchNews = async () => {
+      try {
+        const response = await fetch('https://time.com/wp-json/wp/v2/posts');
+        const data = await response.json();
+        setNews(data); 
+      } catch (error) {
+        console.error('Error fetching news:', error);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 6</IonTitle>
+          <IonTitle>Time News</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 6</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <h1>Hello World</h1>
+        <div className="container-scroll">
+          {/* Mostrar las últimas 3 noticias */}
+          {news.slice(0, 3).map((item, index) => (
+            <div className="card" key={index}>
+              <a href={item.link} target="_blank" rel="noopener noreferrer"> <img src={item.jetpack_featured_media_url} alt={item.title.rendered} ></img></a>
+              <a href={item.link} target="_blank" rel="noopener noreferrer"> <h2>{item.title.rendered}</h2></a>
+              <p className='date'>{item.date}</p> 
+              <p>{item.content.rendered}</p>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">Leer más</a>
+            </div>
+          ))}
+        </div>
       </IonContent>
     </IonPage>
   );

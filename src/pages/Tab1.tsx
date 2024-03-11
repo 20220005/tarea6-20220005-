@@ -1,25 +1,34 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonImg
+} from "@ionic/react";
 
-import './Tab1.css';
+import toolbox from "../img/toolbox.png"
+import "./Tab1.css";
 
 const Tab1: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Home</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-      
+       
 
-
-       <h1>Hello World</h1>
+        <div className="container-toolbox">
+          <IonImg
+          className="toolbox"
+            src={toolbox}
+            alt="Image of Toolbox"
+          ></IonImg>
+          <h1>Welcome my ToolBox App</h1>
+        </div>
       </IonContent>
     </IonPage>
   );
